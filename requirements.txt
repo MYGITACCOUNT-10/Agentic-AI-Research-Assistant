@@ -1,0 +1,37 @@
+# Data modeling and validation
+pydantic
+
+# HTTP requests and API handling
+requests
+urllib3
+
+# arXiv feed parsing
+feedparser
+
+# Numerical computation
+numpy
+
+# Machine learning utilities
+scikit-learn
+
+# Vector databases and similarity search
+chromadb
+faiss-cpu
+
+# LLM tooling and embeddings
+langchain
+langchain-core
+langchain-community
+
+# Agent orchestration
+langgraph
+
+# Frontend and visualization
+streamlit
+
+# Notebook and experimentation support
+jupyter
+ipykernel
+
+
+
