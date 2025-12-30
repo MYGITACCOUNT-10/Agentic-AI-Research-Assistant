@@ -1,37 +1,35 @@
-Agentic AI Research Assistant
+## 1. Overview
 
-A Modular, Agent-Based System for Automated Literature Analysis
+This project implements an agent-based research assistant that helps analyze academic literature in a structured and systematic way. Instead of treating research as a conversational task, the system models it as a clear, step-by-step workflow, similar to how a human researcher would approach a literature review.
 
-1. Overview
+Given a research question, the system retrieves relevant papers from arXiv, identifies the intent of the query, breaks the problem into smaller sub-questions, and analyzes the literature for each sub-question. It then compares findings across multiple papers to identify areas of agreement, disagreement, and gaps before synthesizing the results into a consolidated report.
 
-This repository implements an agentic research assistant that performs structured literature analysis over arXiv papers using a multi-stage, agent-based pipeline.
+Each stage of this process is handled by a dedicated agent with a specific responsibility. This design keeps the system modular and transparent, making it easier to understand how conclusions are formed and how individual components contribute to the final outcome.
 
-Rather than functioning as a conversational chatbot, the system models research as a reproducible workflow in which each stage—retrieval, planning, verification, and synthesis—is handled by a dedicated agent with a clearly defined responsibility.
+Rather than producing a free-form text response, the system generates a structured research report that includes synthesized findings, limitations, and conclusions in a consistent, machine-readable format. This makes the output easier to inspect, validate, and reuse.
 
-The project emphasizes modular design, explainability, and structured outputs suitable for research and system-level evaluation.
+Overall, the project demonstrates how agent-based system design can be applied to research-oriented tasks, emphasizing clarity, reproducibility, and thoughtful reasoning over surface-level interaction.
 
-2. Key Capabilities
+---
 
-Automated retrieval of relevant research papers from arXiv
+## 2. Key Capabilities
 
-Research intent classification based on user query
+* Automated retrieval of relevant research papers from arXiv
+* Research intent classification based on user queries
+* Decomposition of research objectives into focused sub-questions
+* Vector-based retrieval over paper abstracts using Retrieval-Augmented Generation (RAG)
+* Cross-paper verification identifying agreements, disagreements, and gaps
+* Reasoned synthesis of findings across multiple sources
+* Generation of a structured research report using typed data models
+* Optional Streamlit-based interface for paper inspection and result visualization
 
-Decomposition of the research objective into sub-questions
+---
 
-Vector-based retrieval over paper abstracts using RAG
-
-Cross-paper verification identifying agreements, disagreements, and gaps
-
-Reasoned synthesis of findings across multiple sources
-
-Generation of a structured research report using typed data models
-
-Optional Streamlit-based interface for paper inspection and result visualization
-
-3. System Architecture
+## 3. System Architecture
 
 The system follows a deterministic, multi-stage research workflow:
 
+```
 User Query
    ↓
 arXiv Paper Retrieval
@@ -49,11 +47,15 @@ Verification Across Papers
 Synthesis of Findings
    ↓
 Structured Research Report
-
+```
 
 Each stage is implemented as an independent module, enabling isolation, testing, and future extensibility.
 
-4. Repository Structure
+---
+
+## 4. Repository Structure
+
+```
 .
 ├── frontend/                       Optional Streamlit interface
 │   └── app.py
@@ -71,77 +73,32 @@ Each stage is implemented as an independent module, enabling isolation, testing,
 ├── workflow_graph.ipynb            Workflow visualization and experimentation
 ├── requirements.txt
 └── README.md
+```
 
-5. Core Design Principles
-5.1 Separation of Concerns
+---
 
-Each agent is responsible for a single research function, reducing coupling and improving explainability.
+## 5. Core Design Principles
 
-5.2 Pipeline as a First-Class Abstraction
+### 5.1 Separation of Concerns
 
-The research workflow is explicitly defined in run_research_pipeline, ensuring deterministic execution and reproducibility.
+Each agent is responsible for a single research function. This design reduces coupling between components and improves explainability, maintainability, and testability.
 
-5.3 Structured Output
+---
 
-The final research artifact is a typed object rather than unstructured text. This enables validation, serialization, and downstream integration.
+### 5.2 Pipeline as a First-Class Abstraction
 
-5.4 Verification Before Synthesis
+The complete research workflow is explicitly defined within a single pipeline function. This ensures deterministic execution, reproducibility of results, and clarity in system behavior.
 
-Findings are verified across multiple papers before synthesis, aligning with standard academic literature review practices.
+---
 
-6. Example Usage
-from pipeline import run_research_pipeline
+### 5.3 Structured Output Generation
 
-result = run_research_pipeline(
-    "Deep fake image detection"
-)
+The final research output is produced as a structured, typed object rather than free-form text. This enables validation, serialization, and seamless downstream integration.
 
-print(result["report"])
+---
 
-7. Frontend (Optional)
+### 5.4 Verification Before Synthesis
 
-A Streamlit-based interface is included for optional visualization purposes. It allows users to inspect retrieved papers, read abstracts, and view the final structured report.
+Findings from individual papers are verified and compared before synthesis. Agreements, disagreements, and gaps are explicitly identified prior to generating consolidated insights, aligning the system with standard academic literature review practices.
 
-The frontend is intentionally treated as a secondary component. The primary contribution of this project lies in the agentic research pipeline and reasoning workflow.
-
-8. Limitations
-
-Analysis is restricted to abstract-level information
-
-Full-paper PDF parsing is not included
-
-Experimental metrics are not extracted
-
-arXiv retrieval relies on keyword-based search
-
-These limitations are explicitly acknowledged and represent areas for future extension.
-
-9. Future Extensions
-
-Full-paper PDF parsing and section-level analysis
-
-Semantic re-ranking of retrieved papers
-
-Citation and influence graph analysis
-
-Persistent research memory across sessions
-
-Human-in-the-loop verification
-
-Extended orchestration using LangGraph
-
-10. Technology Stack
-
-Python 3.10 or higher
-
-Pydantic for structured data modeling
-
-arXiv API for literature retrieval
-
-Vector databases such as FAISS or Chroma
-
-Large language models for reasoning and synthesis
-
-Streamlit for optional visualization
-
-LangGraph for optional orchestration
+---
