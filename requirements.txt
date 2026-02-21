@@ -1,0 +1,31 @@
+# ============================================================
+# requirements.txt — Agentic Research Assistant
+# ============================================================
+# Generated from source imports across all agent/pipeline files.
+# Install with:
+#   pip install -r requirements.txt
+
+# ── arXiv paper fetching ─────────────────────────────────────
+feedparser>=6.0.11
+
+# ── LangChain ecosystem ──────────────────────────────────────
+langchain-core>=0.3.0
+langchain-community>=0.3.0
+langchain-ollama>=0.2.0
+langchain-huggingface>=0.1.0
+
+# ── Vector store ─────────────────────────────────────────────
+chromadb>=0.5.0
+
+# ── Embeddings ───────────────────────────────────────────────
+sentence-transformers>=3.0.0
+
+# ── Data validation / schemas ────────────────────────────────
+pydantic>=2.0.0
+
+# ── FastAPI backend ──────────────────────────────────────────
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+
+# ── Original Streamlit UI (kept for backwards compatibility) ─
+streamlit>=1.40.0

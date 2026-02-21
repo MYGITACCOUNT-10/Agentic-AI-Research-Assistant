@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Agentic Research Assistant — powered by a multi-agent arXiv research pipeline." />
+  <title>Agentic Research Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="badge">Multi-Agent · arXiv · FastAPI</div>
+      <h1>📚 Agentic Research Assistant</h1>
+      <p class="hero-sub">
+        Ask any research question. Our pipeline fetches arXiv papers, analyses them
+        across multiple agents, and synthesises a structured research report — instantly.
+      </p>
+    </div>
+  </header>
+
+  <!-- ── Main ───────────────────────────────────────────────────────────── -->
+  <main class="container">
+
+    <!-- Input card -->
+    <section class="card input-card" id="input-section">
+      <h2>🔎 Research Question</h2>
+      <div class="input-row">
+        <input
+          id="question-input"
+          type="text"
+          placeholder="e.g. Compare CNN and transformer based deepfake detection methods"
+          autocomplete="off"
+          aria-label="Research question"
+        />
+        <button id="submit-btn" onclick="submitResearch()">
+          <span id="btn-text">Run Research</span>
+          <span class="btn-icon">→</span>
+        </button>
+      </div>
+      <p class="hint">⏱ The pipeline typically takes 30 – 90 seconds depending on your question.</p>
+    </section>
+
+    <!-- Loading state -->
+    <section class="card loading-card hidden" id="loading-section">
+      <div class="spinner"></div>
+      <p class="loading-label">Running multi-agent research pipeline…</p>
+      <div class="steps">
+        <span class="step done">Fetching papers</span>
+        <span class="step active" id="step-indicator">Building vector DB</span>
+        <span class="step">Classifying intent</span>
+        <span class="step">Generating sub-questions</span>
+        <span class="step">Retrieval &amp; analysis</span>
+        <span class="step">Synthesis &amp; report</span>
+      </div>
+    </section>
+
+    <!-- Error state -->
+    <section class="card error-card hidden" id="error-section">
+      <p class="error-title">⚠️ Something went wrong</p>
+      <p id="error-message" class="error-body"></p>
+    </section>
+
+    <!-- Results -->
+    <section id="results-section" class="hidden">
+
+      <div class="results-header">
+        <h2>✅ Research Complete</h2>
+        <button class="reset-btn" onclick="resetUI()">New Search</button>
+      </div>
+
+      <!-- Intent -->
+      <div class="card result-card" id="card-intent">
+        <div class="card-label">🎯 Classified Intent</div>
+        <p id="result-intent"></p>
+      </div>
+
+      <!-- Sub-Questions -->
+      <div class="card result-card" id="card-subq">
+        <div class="card-label">🧩 Generated Sub-Questions</div>
+        <ol id="result-subquestions"></ol>
+      </div>
+
+      <!-- Synthesis -->
+      <div class="card result-card" id="card-synthesis">
+        <div class="card-label">📑 Synthesized Findings</div>
+        <div id="result-synthesis"></div>
+      </div>
+
+      <!-- Report -->
+      <div class="card result-card" id="card-report">
+        <div class="card-label">📄 Final Research Report</div>
+        <pre id="result-report"></pre>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer>
+    <p>Agentic Research Assistant &mdash; FastAPI + Vanilla JS &mdash; Powered by arXiv &amp; ChromaDB</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
